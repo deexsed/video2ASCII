@@ -32,7 +32,7 @@ char pixelToASCII(int pixel_intensity) {
 int main() {
     initAsciiIndexCache(); // Инициализация таблицы символов
 
-    string video_path = "/Project/video2ASCII/exp1.mp4"; // Выберите видео и укажите путь к нему тут
+    string video_path = "exp1.mp4"; // Выберите видео и укажите путь к нему тут
     VideoCapture cap(video_path);
 
     double fps = cap.get(CAP_PROP_FPS);
@@ -47,14 +47,13 @@ int main() {
 
     height = (width * frame_height / frame_width) * 0.5;
 
-    Mat frame, gray_frame, resized_frame;
-
-    string ascii_frame;
+    vector<string> ascii_framesVector;
 
     mutex mtx;
     condition_variable cv;
     bool frame_ready = false;
 
+    Mat frame, gray_frame, resized_frame;
     // Поток с вычислением нужного символа ASCII относительно глубины цвета пикселя
     thread thread1([&](){
         while (true) {
@@ -66,6 +65,8 @@ int main() {
 
             resize(gray_frame, resized_frame, Size(width, height), 0, 0, INTER_LINEAR);
 
+            string ascii_frame;
+
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     ascii_frame += pixelToASCII(resized_frame.at<uchar>(i, j));
@@ -74,6 +75,7 @@ int main() {
             }
             {
                 lock_guard<mutex> lock(mtx);
+                ascii_framesVector.push_back(ascii_frame);
                 frame_ready = true;
             }
             cv.notify_one();
@@ -82,14 +84,18 @@ int main() {
 
     // Поток с выводом символьной "картинки"
     thread thread2([&]() {
+        int frame_index = 0;
         while (true) {
             unique_lock<mutex> lock(mtx);
             cv.wait(lock);
 
-            system("cls");
-            cout << ascii_frame;
-            ascii_frame.clear();
-            this_thread::sleep_for(chrono::milliseconds(frame_duration_ms));
+            if (frame_index < ascii_framesVector.size())
+            {
+                system("cls");
+                cout << ascii_framesVector[frame_index];
+                this_thread::sleep_for(chrono::milliseconds(frame_duration_ms));
+                frame_index++;
+            }
 
             frame_ready = false;
         }
