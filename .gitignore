@@ -1,0 +1,76 @@
+# Собранные бинарники
+video2ASCII
+video2ASCII.exe
+*.exe
+*.out
+*.bin
+
+# Объектные файлы и артефакты компиляции
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.lib
+
+# Временные файлы сборки
+*.tmp
+*.temp
+core
+core.*
+
+# Скачанные видео файлы (все возможные расширения)
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.3gp
+*.3g2
+*.asf
+*.rm
+*.rmvb
+*.vob
+*.ogv
+*.mpeg
+*.mpg
+*.m2v
+*.ts
+*.mts
+*.m2ts
+*.divx
+*.xvid
+*.f4v
+*.swf
+
+# Временные файлы с префиксом temp_video_
+temp_video_*
+
+# Другие медиа файлы (на случай)
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+
+# Файлы IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# CMake артефакты
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+build/
+
+# Makefile артефакты (сам Makefile должен быть в репозитории)
+# build/ уже указан выше
