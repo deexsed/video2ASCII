@@ -18,6 +18,12 @@ set(SOURCES
     src/utils.cpp
     src/cli.cpp
     src/video_path_resolver.cpp
+    src/logger.cpp
+    src/signal_handler.cpp
+    src/video_validator.cpp
+    src/video_cache.cpp
+    src/processing_stats.cpp
+    src/interactive_cli.cpp
 )
 
 # Создание исполняемого файла

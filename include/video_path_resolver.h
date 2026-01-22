@@ -3,6 +3,8 @@
 #include <string>
 #include "video_downloader.h"
 #include "utils.h"
+#include "video_cache.h"
+#include "video_validator.h"
 
 namespace video2ascii {
 

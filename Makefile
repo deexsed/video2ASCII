@@ -11,8 +11,20 @@ INCLUDE_DIR := include
 BUILD_DIR := build
 OBJ_DIR := $(BUILD_DIR)/obj
 
-# Исходные файлы
-SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
+# Исходные файлы (явно перечисляем для правильного порядка)
+SOURCES := $(SRC_DIR)/main.cpp \
+           $(SRC_DIR)/ascii_cache.cpp \
+           $(SRC_DIR)/video_downloader.cpp \
+           $(SRC_DIR)/video_processor.cpp \
+           $(SRC_DIR)/utils.cpp \
+           $(SRC_DIR)/cli.cpp \
+           $(SRC_DIR)/video_path_resolver.cpp \
+           $(SRC_DIR)/logger.cpp \
+           $(SRC_DIR)/signal_handler.cpp \
+           $(SRC_DIR)/video_validator.cpp \
+           $(SRC_DIR)/video_cache.cpp \
+           $(SRC_DIR)/processing_stats.cpp \
+           $(SRC_DIR)/interactive_cli.cpp
 OBJECTS := $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 # Имя исполняемого файла

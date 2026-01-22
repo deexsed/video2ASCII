@@ -24,5 +24,20 @@ bool isUrl(const std::string& path);
  */
 std::string generateTempFileName(const std::string& extension = ".mp4");
 
+/**
+ * @brief Проверяет доступное место на диске
+ * @param path Путь к директории для проверки
+ * @param requiredSizeMB Требуемый размер в мегабайтах
+ * @return true если достаточно места
+ */
+bool hasEnoughDiskSpace(const std::string& path, size_t requiredSizeMB);
+
+/**
+ * @brief Получает доступное место на диске в мегабайтах
+ * @param path Путь к директории
+ * @return Количество доступных мегабайт
+ */
+size_t getAvailableDiskSpaceMB(const std::string& path);
+
 } // namespace utils
 } // namespace video2ascii

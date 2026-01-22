@@ -1,6 +1,7 @@
 #pragma once
 
 #include "config.h"
+#include <string>
 
 namespace video2ascii {
 
@@ -13,9 +14,10 @@ namespace video2ascii {
 class AsciiCache {
 public:
     /**
-     * @brief Конструктор - инициализирует кеш
+     * @brief Конструктор - инициализирует кеш с набором символов
+     * @param asciiChars Набор ASCII символов для использования
      */
-    AsciiCache();
+    explicit AsciiCache(const std::string& asciiChars = config::ASCII_CHARS);
     
     /**
      * @brief Преобразует интенсивность пикселя в ASCII символ
@@ -23,8 +25,17 @@ public:
      * @return ASCII символ для данной интенсивности
      */
     char pixelToASCII(int pixel_intensity) const;
+    
+    /**
+     * @brief Обновить набор символов
+     */
+    void setChars(const std::string& asciiChars);
 
 private:
+    void initializeCache();
+    
+    std::string asciiChars_;
+    int charsLength_;
     int cache_[config::MAX_PIXEL_INTENSITY];
 };
 
